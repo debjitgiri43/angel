@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Angel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+            margin: 0;
+        }
+
+        .card {
+            background-color: #ffebcd;
+            border-radius: 15px;
+            padding: 40px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: fadeIn 2s forwards; /* Fade in animation */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .card img {
+            width: 120px;  /* Adjust the size of the photo */
+            height: 120px;
+            border-radius: 50%; /* Circular shape */
+            margin-bottom: 20px; /* Space between image and message */
+            animation: bounceIn 2s ease; /* Animation for image */
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+            }
+            60% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .card h1 {
+            font-size: 2.5rem;
+            color: #ff6347;
+            margin-bottom: 20px;
+            animation: slideIn 1s ease-in; /* Animation for header */
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .card .message {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 30px;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        .card button {
+            background-color: #ff6347;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            animation: pulse 2s infinite; /* Pulse animation for button */
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .card button:hover {
+            background-color: #ff4500;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-content">
+            <!-- Photo of the person -->
+            <img src="WhatsApp Image 2025-03-11 at 13.24.53_2b756192.jpg" alt="Birthday Person Photo" id="birthday-photo">
+
+            <h1 id="birthday-message">Happy Birthday!</h1>
+            <p class="message">Wishing you a year filled with happiness, success, and unforgettable memories! 🎉</p>
+            <button id="change-message">Click to Change Message</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("change-message").addEventListener("click", function() {
+            let message = document.getElementById("birthday-message");
+            let newMessage = "May this special day bring you endless joy, love, and all the cake you can eat!";
+            message.innerHTML = newMessage;
+            document.querySelector(".message").innerHTML = "Cheers to another fabulous year ahead! 🎂✨";
+
+            // Add an animation when the message changes
+            message.style.animation = 'fadeIn 2s forwards';
+            document.querySelector(".message").style.animation = 'fadeIn 2s forwards';
+        });
+    </script>
+</body>
+</html>
