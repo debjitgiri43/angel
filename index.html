@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Angel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            overflow: hidden;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+        }
+        .card {
+            width: 90%;
+            max-width: 350px;
+            height: auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+            animation: pop-in 1s ease-out;
+            display: none;
+        }
+        h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 28px;
+            color: #9c27b0;
+            margin-bottom: 10px;
+        }
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ff4081;
+            margin-bottom: 10px;
+        }
+        .balloon {
+            width: 40px;
+            height: 60px;
+            background: red;
+            border-radius: 50% 50% 45% 45%;
+            position: absolute;
+            bottom: -100px;
+            animation: float 7s linear infinite;
+        }
+        p {
+            font-size: 16px;
+            color: #555;
+            margin: 8px 0;
+        }
+        .message {
+            font-size: 20px;
+            font-family: 'Dancing Script', cursive;
+            color: #d81b60;
+            margin: 15px 0;
+        }
+        .countdown {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 15px;
+            border-radius: 10px;
+        }
+        button {
+            background: #9c27b0;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: 'Playfair Display', serif;
+            transition: background 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background: #d81b60;
+            transform: scale(1.05);
+        }
+        @keyframes float {
+            0% { transform: translateY(100px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-800px); opacity: 1; }
+        }
+        @keyframes pop-in {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 24px;
+            }
+            .message {
+                font-size: 18px;
+            }
+            button {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown" id="countdown"></div>
+    <div class="card" id="card">
+        <img src="WhatsApp Image 2025-03-11 at 13.24.53_2b756192.jpg" alt="Birthday Person" class="profile-img">
+        <h2>Happy Birthday!</h2>
+        <p class="message">Happy Birthday to someone truly extraordinary! You bring light, laughter, and love wherever you go. May this year be filled with magical moments, boundless happiness, and dreams that turn into reality. You deserve all the joy this world has to offer. Keep shining, keep smiling, and keep being the wonderful person you are. Today, we celebrate you and all the beauty you bring into our lives!</p>
+    </div>
+    <script>
+        function createBalloons() {
+            setInterval(() => {
+                for (let i = 0; i < 10; i++) {
+                    let balloon = document.createElement("div");
+                    balloon.classList.add("balloon");
+                    balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    balloon.style.left = `${Math.random() * window.innerWidth}px`;
+                    balloon.style.animationDuration = `${Math.random() * 4 + 4}s`;
+                    document.body.appendChild(balloon);
+                    setTimeout(() => balloon.remove(), 8000);
+                }
+            }, 2000);
+        }
+
+        function updateCountdown() {
+            const birthday = new Date(new Date().getFullYear(), 6, 3, 0, 10, 0);
+            const now = new Date();
+            if (now > birthday) {
+                localStorage.setItem("birthdayShown", "true");
+                document.getElementById("card").style.display = "block";
+                document.getElementById("countdown").style.display = "none";
+                return;
+            }
+            const diff = birthday - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById("countdown").innerText = `Time until birthday: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+        
+        if (localStorage.getItem("birthdayShown") === "true") {
+            document.getElementById("card").style.display = "block";
+            document.getElementById("countdown").style.display = "none";
+        } else {
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+        }
+        
+        createBalloons();
+    </script>
+</body>
+</html>
